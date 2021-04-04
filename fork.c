@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <sys/wait.h>
 #include <unistd.h>
 
@@ -7,16 +8,19 @@ void forkImplement(int mode)
     // 建立子行程
     pid_t pid = fork();
 
+    int counter = 0;
+
     if (pid == 0) // 子行程
     {
         if (mode == 2)
         {
             wait(NULL);
         }
-        int len = 100;
+        int len = 35000;
         int sum = len * (len + 1) / 2;
-        printf("sum : %d.  ", sum);
-        printf("Child process!.  pid number : %d\n", getpid());
+        printf("sum : %d. ", sum);
+        printf("Child process! ");
+        printf("pid : %d. ppid : %d.\n", getpid(), getppid());
     }
     else if (pid > 0) // 父行程
     {
@@ -25,13 +29,14 @@ void forkImplement(int mode)
             wait(NULL);
         }
         int sum = 0;
-        int len = 100;
+        int len = 35000;
         for (int i = 0; i <= len; i++)
         {
             sum += i;
         }
-        printf("sum : %d.  ", sum);
-        printf("Parent process!. pid number : %d\n", getpid());
+        printf("sum : %d. ", sum);
+        printf("Parent process! ");
+        printf("pid : %d. ppid : %d.\n", getpid(), getppid());
     }
     else // 錯誤
     {
