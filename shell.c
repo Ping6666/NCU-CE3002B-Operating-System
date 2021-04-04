@@ -165,13 +165,13 @@ void executeCommandsRedirected(char **param, int type) // type : 0 RD, 1 WR, 2 A
                 switch (type)
                 {
                 case 0:
-                    fd = open(fileNow[0], O_RDONLY);
+                    fd = open(*fileNow, O_RDONLY);
                     break;
                 case 1:
-                    fd = open(fileNow[0], O_WRONLY | O_CREAT | O_TRUNC, 0664);
+                    fd = open(*fileNow, O_WRONLY | O_CREAT | O_TRUNC, 0664);
                     break;
                 case 2:
-                    fd = open(fileNow[0], O_WRONLY | O_CREAT | O_APPEND, 0664);
+                    fd = open(*fileNow, O_WRONLY | O_CREAT | O_APPEND, 0664);
                     break;
 
                 default:
